@@ -1,101 +1,173 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blind Bidding App</title>
   <link href='https://fonts.googleapis.com/css?family=Lobster|Open+Sans:400,400italic,300italic,300|Raleway:300,400,600' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="css/toastr.min.css">
-  <link rel="stylesheet" type="text/css" href="css/animate.css">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/toastr.min.css">
+  <link rel="stylesheet" href="/css/animate.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f8f9fa;
+    }
+
+    .content {
+      margin-top: 50px;
+    }
+
+    .logo h2 {
+      font-size: 3rem;
+      color: #495057;
+    }
+
+    .logo h3 {
+      font-size: 1.5rem;
+      color: #6c757d;
+    }
+
+    .btn-action {
+      width: 150px;
+    }
+
+    .custom-card {
+      border: 1px solid #dee2e6;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+    }
+
+    footer {
+      margin-top: 50px;
+      padding: 20px 0;
+      background-color: #343a40;
+      color: #fff;
+      text-align: center;
+    }
+
+    footer a {
+      color: #0dcaf0;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    .rounded-image {
+      border-radius: 10px;
+    }
+
+    .form-label {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    #progress-bar {
+      height: 20px;
+    }
+
+    .btn-control {
+      margin: 5px;
+      min-width: 200px;
+    }
+  </style>
 </head>
 
 <body>
   <div class="content">
     <div class="container wow fadeInUp delay-03s">
-      <div class="row">      
+      <!-- Logo Section -->
+      <div class="row">
         <div class="logo text-center">
-		      <h2>ETH - Blind Auction</h2>
+          <h2>ETH - Blind Auction</h2>
           <h3>May the highest bidder win!</h3>
         </div>
       </div>
-            
-      <div class="row text-center" style="padding-top:25px">
 
-        <div class="col-lg-2 col-lg-offset-2 text-center img-chairperson">
-            <img src="img/antiqueTrophy.jpg" class="rounded" height="400px" width="280px">
+      <!-- Auction Item and Form Section -->
+      <div class="row text-center mt-4">
+        <!-- Auction Image -->
+        <div class="col-lg-4 text-center">
+          <img src="/img/antiqueTrophy.jpg" class="rounded-image img-fluid shadow" height="400" width="280" alt="Antique Trophy">
         </div>
-        
-        <div class="col-lg-6 col-lg-offset-1">
-          <div style="margin-left:40px;">
-            <h2 class="subs-title text-center">Bid on this antique trophy!</h2>
-            <label class="subs-title">
-                <b>Enter blinded bid: </b>&nbsp;
-                  <input type="text" class="bid-input form-control" id="bet-value" placeholder="Enter in bytes"></input>
-                <br/>
-                <br>
-            </label>
 
-            <label class="subs-title">
-                <b>Enter deposit amount: </b>&nbsp;
-                  <input type="text" class="bid-input form-control" id="message-value"></input>
-                <br/>
-            </label>
+        <!-- Form Section -->
+        <div class="col-lg-6 offset-lg-1">
+          <div class="custom-card">
+            <h4 class="text-center mb-4">Bid on this antique trophy!</h4>
 
-            <center style="padding-top:25px"><button type="submit" id="submit-bid" class="btn btn-primary btn-action align-center">Bid</button></center>
-            
-            <hr style="width:200px">
+            <!-- Bid Input -->
+            <div class="mb-3">
+              <label for="bet-value" class="form-label">Enter Blinded Bid:</label>
+              <input type="text" id="bet-value" class="form-control" placeholder="Enter in bytes">
+            </div>
 
-            <label class="subs-title">
-                <b>Reveal your bid:</b>&nbsp;
-                  <input type="text" class="bid-input form-control" id="bet-reveal"></input>
-                  &nbsp; <br><br>
-                <b>Enter the OTP:</b>&nbsp;
-                  <input type="text" class="bid-input form-control" id="password"></input>
-                <br/>
-            </label>
-    
-            <div class="row" style="padding-top:20px"> 
-                  <center><button type="submit" id="submit-reveal" class="btn btn-primary btn-action align-center">Reveal</button></center>
-                  <br>
+            <!-- Deposit Input -->
+            <div class="mb-3">
+              <label for="message-value" class="form-label">Enter Deposit Amount:</label>
+              <input type="text" id="message-value" class="form-control" placeholder="Enter deposit in ETH">
+            </div>
+
+            <div class="text-center">
+              <button id="submit-bid" class="btn btn-primary btn-action">Submit Bid</button>
+            </div>
+
+            <hr>
+
+            <!-- Reveal Section -->
+            <div class="mb-3">
+              <label for="bet-reveal" class="form-label">Reveal Your Bid:</label>
+              <input type="text" id="bet-reveal" class="form-control" placeholder="Enter your bid">
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label">Enter OTP:</label>
+              <input type="text" id="password" class="form-control" placeholder="Enter secret">
+            </div>
+
+            <div class="text-center">
+              <button id="submit-reveal" class="btn btn-primary btn-action">Reveal Bid</button>
             </div>
           </div>
         </div>
-
       </div>
 
-		<br><hr>
+      <br>
 
-    <div class="row" style="padding-top:20px">
-        <div id="info-section" class="row" style="font-size:20px; text-align:center; display:block">
-            Current phase: <span id="phase-notification-text"></span>
+      <!-- Phase Information and Control Buttons -->
+      <div class="row text-center mt-4">
+        <div id="info-section" class="mb-3">
+          <h5>Current Phase: <span id="phase-notification-text">Bidding Not Started</span></h5>
         </div>
-        <br>
-        <center>
-          <button type="submit" id="change-phase" class="btn btn-primary btn-control align-center chairperson" >Move to next phase</button>&nbsp;&nbsp;
-          <button type="submit" id="withdraw-bid" class="btn btn-primary btn-control align-center other-user" >Withdraw</button>&nbsp;&nbsp;
-          <button type="submit" id="generate-winner" class="btn btn-primary btn-control align-center">Show winning bid</button>
-        </center>
-    </div>
 
-    </div>
-      <br><br>
+        <div>
+          <button id="change-phase" class="btn btn-success btn-control">Next Phase</button>
+          <button id="withdraw-bid" class="btn btn-warning btn-control">Withdraw</button>
+          <button id="generate-winner" class="btn btn-danger btn-control">Show Winner</button>
+        </div>
+      </div>
     </div>
   </div>
-  
-  <script src="js/dist/jquery.min.js"></script>
-  <script src="js/dist/bootstrap.min.js"></script>
-  <script src="js/dist/jquery.countdown.min.js"></script>
-  <script src="js/dist/wow.js"></script>
-  <script src="js/dist/custom.js"></script>
-  <script src="js/dist/bootstrap.min.js"></script>
-  <script src="js/dist/toastr.min.js"></script>
-  <script src="js/dist/web3.min.js"></script>
-  <script src="js/dist/truffle-contract.js"></script>
-  <script src="js/app.js"></script>
+
+  <footer>
+    <p>Blind Auction &copy; 2024 | Developed by Data-MaSTeRR</p>
+    <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+  </footer>
+
+  <!-- JavaScript File Paths -->
+  <script src="/js/dist/jquery.min.js"></script>
+  <script src="/js/dist/bootstrap.min.js"></script>
+  <script src="/js/dist/toastr.min.js"></script>
+  <script src="/js/dist/web3.min.js"></script>
+  <script src="/js/dist/truffle-contract.js"></script>
+  <script src="/js/app.js"></script>
 </body>
+
 </html>

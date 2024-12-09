@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,90 +11,225 @@
   <link rel="stylesheet" type="text/css" href="css/toastr.min.css">
   <link rel="stylesheet" type="text/css" href="css/animate.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
+  <style>
+    body {
+      font-family: 'Raleway', sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+
+    .content {
+      padding: 20px;
+    }
+
+    .logo h2 {
+      font-family: 'Lobster', cursive;
+      font-size: 2.8em;
+      color: #007bff;
+      text-shadow: 1px 1px 2px #aaa;
+    }
+
+    .logo h3 {
+      font-size: 1.6em;
+      color: #555;
+    }
+
+    .btn-action {
+      width: 100%;
+      padding: 10px;
+      font-size: 1em;
+      margin: 10px 0;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    .btn-danger {
+      background-color: #dc3545;
+    }
+
+    .btn-danger:hover {
+      background-color: #bd2130;
+    }
+
+    .btn-warning {
+      background-color: #ffc107;
+      color: #333;
+    }
+
+    .btn-warning:hover {
+      background-color: #e0a800;
+    }
+
+    .btn-success {
+      background-color: #28a745;
+    }
+
+    .btn-success:hover {
+      background-color: #1e7e34;
+    }
+
+    .form-control {
+      width: 100%;
+      margin: 10px 0;
+      border: 2px solid #007bff;
+    }
+
+    .rounded {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border: 3px solid #007bff;
+      max-width: 100%;
+      max-height: 300px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    #phase-notification-text {
+      font-weight: bold;
+      color: #007bff;
+      font-size: 1.2em;
+      text-shadow: 1px 1px 2px #ccc;
+    }
+
+    .notification-area {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .notification-area button {
+      margin: 5px;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .progress {
+      margin-top: 20px;
+      height: 25px;
+      border-radius: 5px;
+      overflow: hidden;
+      background-color: #e9ecef;
+    }
+
+    .progress-bar {
+      height: 100%;
+      transition: width 0.4s;
+      font-size: 0.9em;
+      line-height: 25px;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 20px;
+      color: #666;
+      font-size: 0.9em;
+    }
+  </style>
 </head>
 
 <body>
   <div class="content">
     <div class="container wow fadeInUp delay-03s">
-      <div class="row">      
-        <div class="logo text-center">
-		      <h2>ETH - Blind Auction</h2>
+      <div class="row text-center">
+        <div class="logo">
+          <h2>ETH - Blind Auction</h2>
           <h3>May the highest bidder win!</h3>
         </div>
       </div>
-            
-      <div class="row text-center" style="padding-top:25px">
 
-        <div class="col-lg-2 col-lg-offset-2 text-center img-chairperson">
-            <img src="img/antiqueTrophy.jpg" class="rounded" height="400px" width="280px">
+      <div class="progress">
+        <div id="progress-bar" class="progress-bar bg-success" style="width: 0%;" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+          0% Complete
         </div>
-        
-        <div class="col-lg-6 col-lg-offset-1">
-          <div style="margin-left:40px;">
-            <h2 class="subs-title text-center">Bid on this antique trophy!</h2>
-            <label class="subs-title">
-                <b>Enter blinded bid: </b>&nbsp;
-                  <input type="text" class="bid-input form-control" id="bet-value" placeholder="Enter in bytes"></input>
-                <br/>
-                <br>
-            </label>
-
-            <label class="subs-title">
-                <b>Enter deposit amount: </b>&nbsp;
-                  <input type="text" class="bid-input form-control" id="message-value"></input>
-                <br/>
-            </label>
-
-            <center style="padding-top:25px"><button type="submit" id="submit-bid" class="btn btn-primary btn-action align-center">Bid</button></center>
-            
-            <hr style="width:200px">
-
-            <label class="subs-title">
-                <b>Reveal your bid:</b>&nbsp;
-                  <input type="text" class="bid-input form-control" id="bet-reveal"></input>
-                  &nbsp; <br><br>
-                <b>Enter the OTP:</b>&nbsp;
-                  <input type="text" class="bid-input form-control" id="password"></input>
-                <br/>
-            </label>
-    
-            <div class="row" style="padding-top:20px"> 
-                  <center><button type="submit" id="submit-reveal" class="btn btn-primary btn-action align-center">Reveal</button></center>
-                  <br>
-            </div>
-          </div>
-        </div>
-
       </div>
 
-		<br><hr>
-
-    <div class="row" style="padding-top:20px">
-        <div id="info-section" class="row" style="font-size:20px; text-align:center; display:block">
-            Current phase: <span id="phase-notification-text"></span>
+      <div class="row text-center mt-5">
+        <div class="col-lg-4 col-md-6 text-center">
+          <img src="img/macbook.png" class="rounded img-fluid" alt="Antique Trophy">
         </div>
-        <br>
-        <center>
-          <button type="submit" id="change-phase" class="btn btn-primary btn-control align-center chairperson" >Move to next phase</button>&nbsp;&nbsp;
-          <button type="submit" id="withdraw-bid" class="btn btn-primary btn-control align-center other-user" >Withdraw</button>&nbsp;&nbsp;
-          <button type="submit" id="generate-winner" class="btn btn-primary btn-control align-center">Show winning bid</button>
-        </center>
-    </div>
 
+        <div class="col-lg-8 col-md-6">
+          <h3 class="subs-title" style="color: #007bff;">Bid on this Macbook Air!</h3>
+
+          <form>
+            <div class="form-group">
+              <label for="bet-value" style="color: #007bff;">
+                <strong>Enter blinded bid:</strong> <small>(e.g., 0x123abc456def...)</small>
+              </label>
+              <input type="text" id="bet-value" class="form-control" placeholder="Enter blinded bid">
+            </div>
+
+            <div class="form-group">
+              <label for="message-value" style="color: #007bff;">
+                <strong>Enter deposit amount:</strong> <small>(e.g., 5 ETH)</small>
+              </label>
+              <input type="number" id="message-value" class="form-control" placeholder="Enter deposit amount">
+            </div>
+
+            <button type="button" id="submit-bid" class="btn btn-primary btn-action">Place Bid</button>
+          </form>
+
+          <hr>
+
+          <h4 class="mt-4" style="color: #007bff;">Reveal your bid</h4>
+          <form>
+            <div class="form-group">
+              <label for="bet-reveal" style="color: #007bff;">
+                <strong>Enter bid amount:</strong> <small>(e.g., 5 ETH)</small>
+              </label>
+              <input type="number" id="bet-reveal" class="form-control" placeholder="Enter bid amount">
+            </div>
+
+            <div class="form-group">
+              <label for="password" style="color: #007bff;">
+                <strong>Enter your secret key:</strong> <small>(e.g., mySecretKey123)</small>
+              </label>
+              <input type="text" id="password" class="form-control" placeholder="Enter secret key">
+            </div>
+
+            <button type="button" id="submit-reveal" class="btn btn-primary btn-action">Reveal Bid</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="row mt-5 notification-area">
+        <div id="info-section">
+          <h5>Current Phase: <span id="phase-notification-text">Loading...</span></h5>
+        </div>
+        <div>
+          <button type="button" id="change-phase" class="btn btn-danger btn-action" onclick="advanceProgress()">Move to Next Phase</button>
+          <button type="button" id="withdraw-bid" class="btn btn-warning btn-action">Withdraw Deposit</button>
+          <button type="button" id="generate-winner" class="btn btn-success btn-action">Show Winner</button>
+        </div>
+      </div>
     </div>
-      <br><br>
-    </div>
+    <footer>
+      <p>&copy; 2024 Blind Auction App. All rights reserved.</p>
+    </footer>
   </div>
-  
+
+  <script>
+    let progressPercentage = 1;
+    const progressBar = document.getElementById("progress-bar");
+
+    function advanceProgress() {
+      if (progressPercentage < 100) {
+        progressPercentage += 33; // 각 단계마다 33% 증가
+        progressBar.style.width = `${progressPercentage}%`;
+        progressBar.innerText = `${progressPercentage}% Complete`;
+      }
+    }
+  </script>
+
   <script src="js/dist/jquery.min.js"></script>
   <script src="js/dist/bootstrap.min.js"></script>
   <script src="js/dist/jquery.countdown.min.js"></script>
   <script src="js/dist/wow.js"></script>
   <script src="js/dist/custom.js"></script>
-  <script src="js/dist/bootstrap.min.js"></script>
   <script src="js/dist/toastr.min.js"></script>
   <script src="js/dist/web3.min.js"></script>
   <script src="js/dist/truffle-contract.js"></script>
   <script src="js/app.js"></script>
 </body>
+
 </html>
